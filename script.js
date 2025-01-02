@@ -14,6 +14,28 @@ function toggleClearButton() {
     clearButton.style.display = searchQueryValue ? "block" : "none";
 }
 
+// Get the modal and help button
+const modal = document.getElementById("helpModal");
+const helpButton = document.getElementById("helpButton");
+const closeModal = document.getElementById("closeModal");
+
+// When the user clicks the help button, open the modal
+helpButton.onclick = function() {
+    modal.style.display = "flex";
+}
+
+// When the user clicks on the close (x), close the modal
+closeModal.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     let csvData = [];
     let activeFilters = {};
@@ -80,6 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
         buttons.forEach(button => {
             button.style.display = 'flex';
         });
+
+        document.getElementById('refreshFilter').style.display = 'inline-flex';
 
         const searchContainer = document.querySelectorAll('.search-container');
         searchContainer.forEach(bar => {
@@ -162,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
         searchBar.focus();
     };
 
+    document.getElementById('refreshFilter').addEventListener("click",() => renderFilters(csvData));
     // Render the filter dropdowns
     function renderFilters(data) {
         filtersDiv.innerHTML = "";
@@ -277,6 +302,31 @@ document.addEventListener("DOMContentLoaded", () => {
         saveHistory(); // Save state after adding a row
         renderFilteredTable();
     });
+
+    // Add Remove Column functionality
+    document.getElementById("removeColumn").addEventListener("click", () => {
+        const columnNames = csvData[0];                         // Get column names (headers)
+        const columnIndex = promptColumnRemoval(columnNames);   // Prompt user to select a column to remove
+        if (columnIndex === null || columnIndex === -1) {
+            // If the user canceled or input is invalid, do nothing
+            return;
+        }
+
+        // Remove the selected column from all rows
+        csvData.forEach(row => row.splice(columnIndex, 1));
+        
+        saveHistory();         
+        renderFilters(csvData);
+        renderFilteredTable(); 
+    });
+
+    // Prompt the user to select a column to remove
+    function promptColumnRemoval(columnNames) {
+        let columnList = columnNames.map((name, index) => `${index + 1}: ${name}`).join("\n");
+        let columnIndex = prompt(`Select the column to remove:\n${columnList}`);
+        columnIndex = parseInt(columnIndex, 10) - 1; // Convert to zero-based index
+        return columnIndex >= 0 && columnIndex < columnNames.length ? columnIndex : null;
+    }
 
     // Event listener for downloading the CSV
     document.getElementById("downloadCSV").addEventListener("click", () => {

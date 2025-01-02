@@ -1,3 +1,29 @@
+/* Scroll Bar Width */
+::-webkit-scrollbar {
+    scroll-behavior: smooth;
+    height: calc(100% - 3em);
+    overflow-y: auto;
+    width: 10px;
+    height: 10px;
+}
+
+/* Scroll Bar Track */
+::-webkit-scrollbar-track {
+    border: none;
+    border-radius: 10px;
+}
+
+/* Scroll Bar Handle */
+::-webkit-scrollbar-thumb {
+    background: #ccc;  
+    border-radius: 20px;
+}
+
+/* Scroll Bar Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #e2e2e2;  
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -20,6 +46,122 @@ body {
 h1 {
     text-align: center;
     margin-block-start: 10px;
+}
+
+/* Help button circle */
+.help-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #ff6600;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    opacity: 0.75;
+}
+
+.help-button:hover {
+    background-color: #ff8533;
+}
+
+/* Modal (popup) styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+    overflow: auto;
+    transition: opacity 0.5s ease;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+/* Modal Content Styling */
+.modal-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%;
+    max-height: 80%;
+    overflow-y: auto;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.close {
+    font-size: 30px;
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+/* Add smooth scroll to modal content */
+@keyframes fadeIn {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Add some padding and border-radius to list items for better readability */
+.instruction-step {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.instruction-step h3 {
+    font-size: 18px;
+    color: #007bff;
+    margin-bottom: 8px;
+}
+
+.instruction-step p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin-block: 0px;
+}
+
+.instruction-step ul {
+    margin-top: 10px;
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.instruction-step ul li {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.instruction-step ul li i {
+    color: #007bff;
+    margin-right: 5px;
 }
 
 .start {
@@ -79,9 +221,6 @@ table {
 
 table .thead{
     background-color: #ddd;
-    position: sticky;
-    z-index: 1;
-    top: 0;
 }
 
 table, th, td {
@@ -100,7 +239,24 @@ th{
 .data{
     display: flex;
     flex-direction: column;
+    gap: 5px;
+}
 
+.data-control{
+    display: flex;
+    gap: 5px;
+}
+
+#refreshFilter {
+    width: auto;
+    padding: 5px 10px;      /* Adjust the padding to make it as short as possible */
+    white-space: nowrap;    /* Prevent text wrapping */
+    display: none;
+    align-items: center;
+}
+
+#refreshFilter i {
+    margin-right: 5px;
 }
 
 .headerFilter{
@@ -131,7 +287,6 @@ th{
     display: none;
     justify-content: center;
     position: relative;
-    margin-top: 10px;
     width: 100%;
 }
 
@@ -195,7 +350,7 @@ button:hover {
 .buttons {
     display: none;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 5px;
     margin-top: 10px;
 }
 
@@ -235,6 +390,7 @@ button:hover {
     cursor: pointer;
     font-size: 14px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .165), 0 4px 6px -4px rgba(0, 0, 0, .165);
+    opacity: 0.75;
 }
 
 #scrollButtons button:hover {

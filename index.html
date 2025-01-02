@@ -21,6 +21,56 @@
 <body>
     <div class="container">
         <h1>CSV Transformer</h1>
+        <!-- Circle ? button for instructions -->
+        <button id="helpButton" class="help-button"><i class="fa-solid fa-circle-question"></i></button>
+        
+        <!-- Modal for instructions -->
+        <div id="helpModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h2>How to Use CSV Transformer</h2>
+                
+                <div class="instruction-step">
+                    <h3><i class="fa-solid fa-upload"></i> Upload CSV</h3>
+                    <p>Click the "Upload CSV" button to upload your CSV file.</p>
+                </div>
+
+                <div class="instruction-step">
+                    <h3><i class="fa-solid fa-file-csv"></i> Start with an Empty CSV</h3>
+                    <p>If you prefer to start with an empty file, click the "Empty CSV" button.</p>
+                </div>
+
+                <div class="instruction-step">
+                    <h3><i class="fa-solid fa-filter"></i> Filter Data</h3>
+                    <p>Click the "Filter by" button to filter your data.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-refresh"></i> After updating data, click the "Refresh Filter" button to update the filters.</li>
+                        <li><i class="fa-solid fa-search"></i> Use the search bar to filter specific data.</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-step">
+                    <h3><i class="fa-solid fa-sort"></i> Sort Data</h3>
+                    <p>Click a header to sort the corresponding column.</p>
+                </div>
+
+                <div class="instruction-step">
+                    <h3><i class="fa-solid fa-pencil-alt"></i> Edit Data</h3>
+                    <p>Click on a table cell to modify the data directly.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-plus"></i> Use the "Add Row" or "Add Column" buttons to expand your table.</li>
+                        <li><i class="fa-solid fa-trash-can"></i> Click the trashcan icon or use the "Delete Column" button to remove data.</li>
+                        <li><i class="fa-solid fa-undo"></i> Use the "Undo" and "Redo" buttons to revert or reapply changes.</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-step">
+                    <h3><i class="fa-solid fa-download"></i> Download CSV</h3>
+                    <p>Once you're done, click the "Download CSV" button to save your file.</p>
+                </div>
+            </div>
+        </div>
+
         <div class="start">
             <div class="uploadCSV">
                 <label for="csvInput" class="custom-file-upload">
@@ -29,14 +79,17 @@
                 </label>
                 <input type="file" id="csvInput" accept=".csv">
             </div>
-            <button id="startEmpty"><i class="fa-solid fa-file"></i> <b>Empty CSV</b></button>
+            <button id="startEmpty"><i class="fa-solid fa-file-csv"></i> <b>Empty CSV</b></button>
         </div>
         <div class="data">
             <div id="filters"></div>
-            <div class="search-container">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchBar" oninput="toggleClearButton()" placeholder="Search..." />
-                <button id="clearButton" class="clear-button"><i class="fa-solid fa-xmark"></i></button>
+            <div class="data-control">
+                <button id="refreshFilter"><i class="fa-solid fa-arrows-rotate"></i> <b>Refresh Filter</b></button>
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchBar" oninput="toggleClearButton()" placeholder="Search..." />
+                    <button id="clearButton" class="clear-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
             </div>
         </div>
         <div class="table-container">
@@ -47,6 +100,7 @@
             <button id="redoBtn"><i class="fa-solid fa-rotate-right"></i> Redo</button>
             <button id="addRow"><i class="fa-solid fa-plus"></i> Add Row</button>
             <button id="addColumn"><i class="fa-solid fa-plus"></i> Add Column</button>
+            <button id="removeColumn"><i class="fa-solid fa-trash-can"></i> Delete Column</button>
             <button id="downloadCSV"><i class="fa-solid fa-download"></i> Download CSV</button>
         </div>
         <div id="scrollButtons">
