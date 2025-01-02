@@ -8,6 +8,12 @@ document.getElementById("scrollBottom").addEventListener("click", () => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
 });
 
+const clearButton = document.getElementById("clearButton");
+function toggleClearButton() {
+    const searchQueryValue = searchBar.value.trim();
+    clearButton.style.display = searchQueryValue ? "block" : "none";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     let csvData = [];
     let activeFilters = {};
@@ -46,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (historyIndex > 0) {
             historyIndex--;
             csvData = JSON.parse(JSON.stringify(historyStack[historyIndex]));
+            renderFilters(csvData);
             renderFilteredTable();
         }
     }
@@ -55,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (historyIndex < historyStack.length - 1) {
             historyIndex++;
             csvData = JSON.parse(JSON.stringify(historyStack[historyIndex]));
+            renderFilters(csvData);
             renderFilteredTable();
         }
     }
@@ -66,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         uploadBtn.forEach(button => {
             button.style.display = 'none';
         });
+        document.getElementById("startEmpty").style.display = 'none';
 
         const buttons = document.querySelectorAll('.buttons');
         buttons.forEach(button => {
@@ -94,9 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
             headerRow.appendChild(th);
         });
 
-        // Add "Actions" column header
+        // Add "Remove" column header
         const actionTh = document.createElement("th");
-        actionTh.innerText = "Actions";
+        actionTh.innerText = "Remove";
         headerRow.appendChild(actionTh);
         table.appendChild(headerRow);
 
@@ -145,6 +154,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Event listener for the search bar
     searchBar.addEventListener("input", renderFilteredTable); // Trigger render on search input
+    document.getElementById('clearButton').addEventListener("click",clearSearchQuery);
+    function clearSearchQuery() {
+        searchBar.value = "";
+        renderFilteredTable();
+        toggleClearButton();
+        searchBar.focus();
+    };
 
     // Render the filter dropdowns
     function renderFilters(data) {
@@ -221,6 +237,21 @@ document.addEventListener("DOMContentLoaded", () => {
             reader.readAsText(file);
         }
     });
+    
+    document.getElementById("startEmpty").addEventListener("click", () => {
+        const newColumn = prompt("Enter new column name:");
+        if (newColumn === null || newColumn.trim() === "") {
+            // If the prompt is canceled or left empty, do nothing
+            alert("Please reconsider column name.");
+            return;
+        }
+        document.getElementById("startEmpty").style.display = 'none';
+        const headers = [`${newColumn}`];   // Add default headers
+        csvData = [headers];                // Initialize with headers
+        saveHistory();                      // Save initial empty state
+        renderFilteredTable();              // Render table with empty structure
+        renderFilters(csvData);             // Render filters for the empty structure
+    });    
 
     // Add Undo/Redo functionality
     document.getElementById("undoBtn").addEventListener("click", undo);
@@ -228,9 +259,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Add Add Column functionality
     document.getElementById("addColumn").addEventListener("click", () => {
-        const newColumn = "New Column";
+        const newColumn = prompt("Enter new column name:");
+        if (newColumn === null || newColumn.trim() === "") {
+            // If the prompt is canceled or left empty, do nothing
+            return;
+        }
         csvData.forEach(row => row.push(newColumn));
         saveHistory(); // Save state after adding a column
+        renderFilters(csvData);
         renderFilteredTable();
     });
 
@@ -249,7 +285,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const blob = new Blob([csvContent], { type: "text/csv" });
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
-        a.download = "modified.csv";
+        a.download = `${makeTimestamp()}.csv`;
         a.click();
     });
+
+    function makeTimestamp(){
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');       
+        const hours = String(now.getHours()).padStart(2, '0');    
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        const timestamp = `${year}${month}${day}_${hours}${minutes}${seconds}`;
+        return timestamp;
+    }
 });

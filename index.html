@@ -21,18 +21,22 @@
 <body>
     <div class="container">
         <h1>CSV Transformer</h1>
-        <div class="uploadCSV">
-            <label for="csvInput" class="custom-file-upload">
-                <i class="fa-solid fa-upload"></i>
-                <p><b>Upload CSV</b></p>
-            </label>
-            <input type="file" id="csvInput" accept=".csv">
+        <div class="start">
+            <div class="uploadCSV">
+                <label for="csvInput" class="custom-file-upload">
+                    <i class="fa-solid fa-upload"></i>
+                    <p><b>Upload CSV</b></p>
+                </label>
+                <input type="file" id="csvInput" accept=".csv">
+            </div>
+            <button id="startEmpty"><i class="fa-solid fa-file"></i> <b>Empty CSV</b></button>
         </div>
         <div class="data">
             <div id="filters"></div>
             <div class="search-container">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchBar" placeholder="Search..." />
+                <input type="text" id="searchBar" oninput="toggleClearButton()" placeholder="Search..." />
+                <button id="clearButton" class="clear-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
         <div class="table-container">
