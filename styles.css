@@ -1,0 +1,210 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+input, button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+/*Design File Input Button*/
+input[type="file"] {
+    display: none;
+}
+
+.uploadCSV{
+    display: flex;
+    justify-content: center;
+}
+  
+.custom-file-upload {
+    display: inline-flex;
+    padding: 8px;
+    align-items: center;
+    gap: 10px;
+    background-color: #007bff;
+    margin-bottom: 10px;
+}  
+
+.custom-file-upload p{
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+
+.custom-file-upload:hover{
+    background-color: #0056b3;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+#csvTable {
+    width: max-content; /* Ensures the table takes up as much space as it needs */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table .thead{
+    background-color: #ddd;
+    position: sticky;
+    z-index: 1;
+    top: 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th{
+    cursor: pointer;
+}
+
+.data{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.headerFilter{
+    padding: 7px;    
+    background: #fff;
+    color: #000;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #000;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: 'NanumB', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    height: 36px;
+    transition: height .4s ease;
+}
+
+.headerFilter option:first-child{
+    background-color: #ccc;
+}
+
+/* Center the search bar container */
+.search-container {
+    display: none;
+    justify-content: center;
+    position: relative;
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Style for the input field */
+#searchBar {
+    width: 100%;
+    padding-left: 30px !important; /* Space for the icon */
+    padding: 8px;
+    margin-right: 5px;
+    border: 2px solid #000;
+    border-radius: 5px;
+}
+
+/* Icon style inside the search bar */
+.search-container i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+button, .custom-file-upload {
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.buttons {
+    display: none;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.remove-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+.remove-btn i {
+    font-size: 18px;
+}
+
+.remove-btn:hover{
+    background-color: #d32f2f;
+}
+
+#scrollButtons {
+    position: fixed;
+    width: 36px;
+    bottom: 20px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+}
+
+#scrollButtons button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .165), 0 4px 6px -4px rgba(0, 0, 0, .165);
+}
+
+#scrollButtons button:hover {
+    background-color: #0056b3;
+}

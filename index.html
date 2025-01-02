@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta property="og:url" content="https://jihunkimcode.github.io/CSV-Transformer/">
+    <meta property="og:title" content="CSV Transformer">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:description" content="A simple webpage for those who wants to manage CSV file easier.">
+
+    <meta name="author" content="Jihun Kim">
+    <meta name="keywords" content="CSV Transformer">
+    <meta name="description" content="Modify CSV file data">
+    <link rel="icon" type="image/x-icon" href="logo.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Transformer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>    
+</head>
+<body>
+    <div class="container">
+        <h1>CSV Transformer</h1>
+        <div class="uploadCSV">
+            <label for="csvInput" class="custom-file-upload">
+                <i class="fa-solid fa-upload"></i>
+                <p><b>Upload CSV</b></p>
+            </label>
+            <input type="file" id="csvInput" accept=".csv">
+        </div>
+        <div class="data">
+            <div id="filters"></div>
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchBar" placeholder="Search..." />
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="csvTable"></table>
+        </div>
+        <div class="buttons">
+            <button id="undoBtn"><i class="fa-solid fa-rotate-left"></i> Undo</button>
+            <button id="redoBtn"><i class="fa-solid fa-rotate-right"></i> Redo</button>
+            <button id="addRow"><i class="fa-solid fa-plus"></i> Add Row</button>
+            <button id="addColumn"><i class="fa-solid fa-plus"></i> Add Column</button>
+            <button id="downloadCSV"><i class="fa-solid fa-download"></i> Download CSV</button>
+        </div>
+        <div id="scrollButtons">
+            <button id="scrollTop"><i class="fa-solid fa-arrow-up"></i></button>
+            <button id="scrollBottom"><i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
